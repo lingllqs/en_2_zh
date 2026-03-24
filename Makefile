@@ -1,6 +1,9 @@
 CC = gcc
+PREFIX ?= $(HOME)/.local
+BINDIR = $(PREFIX)/bin
+SHAREDIR = $(PREFIX)/share/stardict
 
-CFLAGS = -Iinclude -Wall -O2
+CFLAGS = -Iinclude -Wall -O2 -DDB_PATH=\"$(SHAREDIR)/stardict.db\"
 LDFLAGS = -lsqlite3
 
 SRC = src/main.c src/db.c src/query.c src/cli.c src/render.c
@@ -31,9 +34,6 @@ run: all
 	./$(TARGET)
 
 # ===================== 安装 =====================
-PREFIX ?= $(HOME)/.local
-BINDIR = $(PREFIX)/bin
-SHAREDIR = $(PREFIX)/share/stardict
 
 install: all
 	@echo "Installing binary..."
